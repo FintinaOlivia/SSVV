@@ -1,12 +1,7 @@
 package service;
 
-import domain.Nota;
-import domain.Pair;
-import domain.Student;
-import domain.Tema;
-import repository.NotaXMLRepository;
-import repository.StudentXMLRepository;
-import repository.TemaXMLRepository;
+import domain.*;
+import repository.*;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -29,10 +24,12 @@ public class Service {
 
     public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
 
-    public int saveStudent(String id, String nume, int grupa) {
+    public int saveStudent(String id, String nume, int grupa)
+    {
         Student student = new Student(id, nume, grupa);
-        Student result = studentXmlRepo.save(student);
 
+        Student result = studentXmlRepo.save(student);
+        System.out.println(result);
         if (result == null) {
             return 1;
         }
@@ -113,16 +110,22 @@ public class Service {
         Tema tema = temaXmlRepo.findOne(id);
 
         if (tema != null) {
+            System.out.println("Tema exista");
             LocalDate date = LocalDate.now();
             WeekFields weekFields = WeekFields.of(Locale.getDefault());
+            System.out.println(weekFields);
             int currentWeek = date.get(weekFields.weekOfWeekBasedYear());
+            System.out.println("currentWeek = " + currentWeek);
 
+            ////?????????
+            ///the assumption is you start the 1st semester in week 39 of the "world"
             if (currentWeek >= 39) {
                 currentWeek = currentWeek - 39;
             } else {
+            ///the assumption here is...i do not even know (if currentWeeek < 39)
                 currentWeek = currentWeek + 12;
             }
-
+            System.out.println("currentWeek = " + currentWeek);
             if (currentWeek <= tema.getDeadline()) {
                 int deadlineNou = tema.getDeadline() + noWeeks;
                 return updateTema(tema.getID(), tema.getDescriere(), deadlineNou, tema.getStartline());

@@ -1,8 +1,6 @@
 package console;
 
-import domain.Nota;
-import domain.Student;
-import domain.Tema;
+import domain.*;
 import service.Service;
 
 import java.util.Scanner;
@@ -63,7 +61,8 @@ public class UI {
         System.out.println("Introduceti grupa studentului: ");
         int grupa = scanner.nextInt();
 
-        if (service.saveStudent(id, nume, grupa) != 0) {
+        if (service.saveStudent(id, nume, grupa) != 0)
+        {
             System.out.println("Student adaugat cu succes! \n");
         }
         else {

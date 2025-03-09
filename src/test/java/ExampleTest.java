@@ -1,13 +1,13 @@
-import org.junit.Test;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("ExamplePack")
-public class ExampleTest {
+class ExampleTest {
 
     @Test
-    public void exampleTestCase() {
+    void exampleTestCase() {
         System.out.println("Running an example test...");
         assertTrue(true, "Example assertion passed");
     }

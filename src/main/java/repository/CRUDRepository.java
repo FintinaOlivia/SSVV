@@ -1,6 +1,5 @@
 package repository;
-
-import validation.ValidationException;
+import validation.*;
 
 public interface CRUDRepository<ID, E> {
     /**
