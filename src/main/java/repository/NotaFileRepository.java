@@ -1,9 +1,6 @@
 package repository;
-
-import domain.Nota;
-import domain.Pair;
-import validation.ValidationException;
-import validation.Validator;
+import domain.*;
+import validation.*;
 
 import java.io.*;
 import java.util.stream.Collectors;

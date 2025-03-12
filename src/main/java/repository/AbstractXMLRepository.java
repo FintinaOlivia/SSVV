@@ -1,13 +1,13 @@
 package repository;
 
 import domain.HasID;
+import validation.ValidationException;
+import validation.Validator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import validation.ValidationException;
-import validation.Validator;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
