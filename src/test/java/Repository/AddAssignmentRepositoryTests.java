@@ -21,7 +21,7 @@ public class AddAssignmentRepositoryTests {
         System.out.println("Exists? " + file.exists());
 
         Validator<Tema> validator = new TemaValidator();
-        repository = new TemaXMLRepository(validator, "test.xml");
+        repository = new TemaXMLRepository(validator, "test_teme.xml");
     }
 
     // VALID TEST
