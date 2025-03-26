@@ -7,15 +7,21 @@ import repository.TemaXMLRepository;
 import validation.TemaValidator;
 import validation.Validator;
 
+import java.io.IOException;
+import java.nio.file.Files;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddAssignmentRepositoryTests {
     private TemaXMLRepository repository;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        var tempFile = Files.createTempFile("test", ".xml");
+        Files.writeString(tempFile, "");
+
         Validator<Tema> validator = new TemaValidator();
-        repository = new TemaXMLRepository(validator, "test_teme.xml");
+        repository = new TemaXMLRepository(validator, "test.xml");
     }
 
     // VALID TEST
