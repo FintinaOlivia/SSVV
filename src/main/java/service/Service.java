@@ -30,6 +30,7 @@ public class Service {
 
         Student result = studentXmlRepo.save(student);
         System.out.println(result);
+
         if (result == null) {
             return 1;
         }

@@ -12,8 +12,7 @@ import org.mockito.MockitoAnnotations;
 import repository.StudentXMLRepository;
 import service.Service;
 
-class StudentServiceTest {
-
+public class AddStudentServiceTests {
     @Mock
     private StudentXMLRepository studentXmlRepo;
 
@@ -26,7 +25,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void saveStudent_SuccessfulSave_Returns1() {
+    void saveStudent_FailSave_Returns1() {
         // Arrange
         Student student = new Student("123", "Alice", 101);
         when(studentXmlRepo.save(any(Student.class))).thenReturn(null);
@@ -35,11 +34,11 @@ class StudentServiceTest {
         int result = studentService.saveStudent("123", "Alice", 101);
 
         // Assert
-        assertEquals(1, result, "Expected save to return 1 on success");
+        assertEquals(1, result, "Expected save to return 1 on fail");
     }
 
     @Test
-    void saveStudent_FailedSave_Returns0() {
+    void saveStudent_SuccessfulSave_Returns0() {
         // Arrange
         Student student = new Student("124", "Nume", 102);
         when(studentXmlRepo.save(any(Student.class))).thenReturn(student);
@@ -48,6 +47,6 @@ class StudentServiceTest {
         int result = studentService.saveStudent("124", "Nume", 102);
 
         // Assert
-        assertEquals(0, result, "Expected save to return 0 on failure");
+        assertEquals(0, result, "Expected save to return 0 on success");
     }
 }

@@ -9,7 +9,7 @@ import repository.StudentXMLRepository;
 import validation.StudentValidator;
 import validation.Validator;
 
-class StudentServiceTest {
+class AddStudentRepositoryTests {
     private StudentXMLRepository repository;
 
     @BeforeEach
