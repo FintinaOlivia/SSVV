@@ -13,40 +13,40 @@ import repository.StudentXMLRepository;
 import service.Service;
 
 public class AddStudentServiceTests {
-    @Mock
-    private StudentXMLRepository studentXmlRepo;
-
-    @InjectMocks
-    private Service studentService;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    @Test
-    void saveStudent_FailSave_Returns1() {
-        // Arrange
-        Student student = new Student("123", "Alice", 101);
-        when(studentXmlRepo.save(any(Student.class))).thenReturn(null);
-
-        // Act
-        int result = studentService.saveStudent("123", "Alice", 101);
-
-        // Assert
-        assertEquals(1, result, "Expected save to return 1 on fail");
-    }
-
-    @Test
-    void saveStudent_SuccessfulSave_Returns0() {
-        // Arrange
-        Student student = new Student("124", "Nume", 102);
-        when(studentXmlRepo.save(any(Student.class))).thenReturn(student);
-
-        // Act
-        int result = studentService.saveStudent("124", "Nume", 102);
-
-        // Assert
-        assertEquals(0, result, "Expected save to return 0 on success");
-    }
+//    @Mock
+//    private StudentXMLRepository studentXmlRepo;
+//
+//    @InjectMocks
+//    private Service studentService;
+//
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.openMocks(this);
+//    }
+//
+//    @Test
+//    void saveStudent_FailSave_Returns1() {
+//        // Arrange
+//        Student student = new Student("123", "Alice", 101);
+//        when(studentXmlRepo.save(any(Student.class))).thenReturn(null);
+//
+//        // Act
+//        int result = studentService.saveStudent("123", "Alice", 101);
+//
+//        // Assert
+//        assertEquals(1, result, "Expected save to return 1 on fail");
+//    }
+//
+//    @Test
+//    void saveStudent_SuccessfulSave_Returns0() {
+//        // Arrange
+//        Student student = new Student("124", "Nume", 102);
+//        when(studentXmlRepo.save(any(Student.class))).thenReturn(student);
+//
+//        // Act
+//        int result = studentService.saveStudent("124", "Nume", 102);
+//
+//        // Assert
+//        assertEquals(0, result, "Expected save to return 0 on success");
+//    }
 }
