@@ -9,6 +9,8 @@ import validation.Validator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,13 +32,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithValidFields_OperationIsSuccessful");
 
         // Arrange
-        Tema tema = createValidTema();
+        String validId = generateNewId();
+        Tema tema = createValidTema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertEquals(tema, result, "Expected the entities to be equal");
+        assertNull(result, "Expected the result of a valid insertion to be null");
     }
 
     // ID FIELD TESTS
@@ -51,7 +54,7 @@ public class AddAssignmentRepositoryTests {
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     @Test
@@ -65,7 +68,7 @@ public class AddAssignmentRepositoryTests {
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     // DESCRIPTION FIELD TESTS
@@ -74,13 +77,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithNullDescription_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createNullDescriptionTema();
+        String validId = generateNewId();
+        Tema tema = createNullDescriptionTema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     @Test
@@ -88,13 +92,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithEmptyDescription_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createEmptyDescriptionTema();
+        String validId = generateNewId();
+        Tema tema = createEmptyDescriptionTema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     // DEADLINE FIELD TESTS
@@ -103,13 +108,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithDeadlineLessThan1_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createDeadlineLessThan1Tema();
+        String validId = generateNewId();
+        Tema tema = createDeadlineLessThan1Tema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     @Test
@@ -117,13 +123,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithDeadlineGreaterThan14_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createDeadlineGreaterThan14Tema();
+        String validId = generateNewId();
+        Tema tema = createDeadlineGreaterThan14Tema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     @Test
@@ -131,13 +138,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithDeadlineLessThanStartline_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createDeadlineLessThanStartlineTema();
+        String validId = generateNewId();
+        Tema tema = createDeadlineLessThanStartlineTema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     // STARTLINE FIELD TESTS
@@ -146,13 +154,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithStartlineLessThan1_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createStartlineLessThan1Tema();
+        String validId = generateNewId();
+        Tema tema = createStartlineLessThan1Tema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     @Test
@@ -160,13 +169,14 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithStartlineGreaterThan14_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createStartlineGreaterThan14Tema();
+        String validId = generateNewId();
+        Tema tema = createStartlineGreaterThan14Tema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
     @Test
@@ -174,19 +184,60 @@ public class AddAssignmentRepositoryTests {
         System.out.println("saveAssignment_WithStartlineGreaterThanDeadline_ThrowsValidationException");
 
         // Arrange
-        Tema tema = createStartlineGreaterThanDeadlineTema();
+        String validId = generateNewId();
+        Tema tema = createStartlineGreaterThanDeadlineTema(validId);
 
         // Act
         var result = repository.save(tema);
 
         // Assert
-        assertNull(result, "Expected the entities to be null");
+        assertEquals(result, tema, "Expected the entities to be equal");
     }
 
-//    SETUP
+    @Test
+    void saveAssignment_WithIdExisting_ReturnsEntityOnPutIfAbsent() {
+        System.out.println("saveAssignment_WithIdExisting_ReturnsEntityOnPutIfAbsent");
 
-    private Tema createValidTema() {
-        return new Tema("1", "Valid description", 10, 5);
+        // Arrange
+        String existingId = generateExistingId();
+        Tema tema = createStartlineGreaterThanDeadlineTema(existingId);
+
+        // Act
+        var result = repository.save(tema);
+
+        // Assert
+        assertEquals(result, tema, "Expected the entities to be equal");
+    }
+
+
+    private String generateNewId() {
+        Iterable<Tema> all = repository.findAll();
+
+        StringBuilder newId = new StringBuilder();
+        for(Tema t : all)
+        {
+            newId.append(t.getID());
+        }
+
+        if(newId.length() == 1)
+            newId.append("1");
+
+        return newId.toString();
+    }
+
+    private String generateExistingId() {
+        Iterable<Tema> all = repository.findAll();
+        String existingId = "";
+        for(Tema t : all)
+        {
+            existingId = t.getID();
+        }
+
+        return existingId;
+    }
+
+    private Tema createValidTema(String id) {
+        return new Tema(id, "Valid description", 10, 5);
     }
 
     private Tema createNullIdTema() {
@@ -197,35 +248,35 @@ public class AddAssignmentRepositoryTests {
         return new Tema("", "Valid description", 10, 5);
     }
 
-    private Tema createNullDescriptionTema() {
-        return new Tema("1", null, 10, 5);
+    private Tema createNullDescriptionTema(String id) {
+        return new Tema(id, null, 10, 5);
     }
 
-    private Tema createEmptyDescriptionTema() {
-        return new Tema("1", "", 10, 5);
+    private Tema createEmptyDescriptionTema(String id) {
+        return new Tema(id, "", 10, 5);
     }
 
-    private Tema createDeadlineLessThan1Tema() {
-        return new Tema("1", "Valid description", 0, 5);
+    private Tema createDeadlineLessThan1Tema(String id) {
+        return new Tema(id, "Valid description", 0, 5);
     }
 
-    private Tema createDeadlineGreaterThan14Tema() {
-        return new Tema("1", "Valid description", 15, 5);
+    private Tema createDeadlineGreaterThan14Tema(String id) {
+        return new Tema(id, "Valid description", 15, 5);
     }
 
-    private Tema createDeadlineLessThanStartlineTema() {
-        return new Tema("1", "Valid description", 4, 5);
+    private Tema createDeadlineLessThanStartlineTema(String id) {
+        return new Tema(id, "Valid description", 4, 5);
     }
 
-    private Tema createStartlineLessThan1Tema() {
-        return new Tema("1", "Valid description", 5, 0);
+    private Tema createStartlineLessThan1Tema(String id) {
+        return new Tema(id, "Valid description", 5, 0);
     }
 
-    private Tema createStartlineGreaterThan14Tema() {
-        return new Tema("1", "Valid description", 5, 15);
+    private Tema createStartlineGreaterThan14Tema(String id) {
+        return new Tema(id, "Valid description", 5, 15);
     }
 
-    private Tema createStartlineGreaterThanDeadlineTema() {
-        return new Tema("1", "Valid description", 5, 6);
+    private Tema createStartlineGreaterThanDeadlineTema(String id) {
+        return new Tema(id, "Valid description", 5, 6);
     }
 }
