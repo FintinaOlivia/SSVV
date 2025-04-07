@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entitati>
+    <tema ID="11">
+        <Descriere>Valid description</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>5</Startline>
+    </tema>
+    <tema ID="111111111111">
+        <Descriere>Valid description</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>5</Startline>
+    </tema>
     <tema ID="1">
+        <Descriere>Valid description</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>5</Startline>
+    </tema>
+    <tema ID="111">
+        <Descriere>Valid description</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>5</Startline>
+    </tema>
+    <tema ID="111111111111111111111111111111111111111111111111">
+        <Descriere>Valid description</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>5</Startline>
+    </tema>
+    <tema ID="111111111111111111111111">
+        <Descriere>Valid description</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>5</Startline>
+    </tema>
+    <tema ID="111111">
         <Descriere>Valid description</Descriere>
         <Deadline>10</Deadline>
         <Startline>5</Startline>
