@@ -1,4 +1,4 @@
-package Repository;
+package UnitTests.Repository;
 
 import domain.Tema;
 import org.junit.jupiter.api.BeforeEach;
