@@ -1,6 +1,6 @@
-Tema: id25
-Nota: 1.0
+Tema: id
+Nota: 7.5
 Predata in saptamana: 10
-Deadline: 7
+Deadline: 9
 Feedback: 10
 
