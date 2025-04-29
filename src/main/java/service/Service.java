@@ -8,11 +8,15 @@ import java.time.temporal.WeekFields;
 import java.util.Locale;
 
 public class Service {
-    private StudentXMLRepository studentXmlRepo;
-    private TemaXMLRepository temaXmlRepo;
-    private NotaXMLRepository notaXmlRepo;
+//    private StudentXMLRepository studentXmlRepo;
+//    private TemaXMLRepository temaXmlRepo;
+//    private NotaXMLRepository notaXmlRepo;
 
-    public Service(StudentXMLRepository studentXmlRepo, TemaXMLRepository temaXmlRepo, NotaXMLRepository notaXmlRepo) {
+    private StudentFileRepository studentXmlRepo;
+    private TemaFileRepository temaXmlRepo;
+    private NotaFileRepository notaXmlRepo;
+
+    public Service(StudentFileRepository studentXmlRepo, TemaFileRepository temaXmlRepo, NotaFileRepository notaXmlRepo) {
         this.studentXmlRepo = studentXmlRepo;
         this.temaXmlRepo = temaXmlRepo;
         this.notaXmlRepo = notaXmlRepo;
@@ -111,10 +115,9 @@ public class Service {
         Tema tema = temaXmlRepo.findOne(id);
 
         if (tema != null) {
-            System.out.println("Tema exista");
+            System.out.println("Tema este gasita");
             LocalDate date = LocalDate.now();
             WeekFields weekFields = WeekFields.of(Locale.getDefault());
-            System.out.println(weekFields);
             int currentWeek = date.get(weekFields.weekOfWeekBasedYear());
             System.out.println("currentWeek = " + currentWeek);
 
