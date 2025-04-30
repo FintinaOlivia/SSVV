@@ -11,14 +11,10 @@ public class Main {
         Validator<Student> studentValidator = new StudentValidator();
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
-//
-//        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
-//        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
-//        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
 
-        StudentFileRepository fileRepository1 = new StudentFileRepository(studentValidator, "studenti.txt");
-        TemaFileRepository fileRepository2 = new TemaFileRepository(temaValidator, "teme.txt");
-        NotaFileRepository fileRepository3 = new NotaFileRepository(notaValidator, "note.txt");
+        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
+        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
+        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
 
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         UI consola = new UI(service);
